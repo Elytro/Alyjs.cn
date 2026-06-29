@@ -1,1 +1,333 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>阿里云静态资源库</title>
+    <link href="https://apps.bdimg.com/libs/bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://apps.bdimg.com/libs/fontawesome/4.4.0/css/font-awesome.min.css" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
 
+        body {
+            background: #fff;
+            color: #333;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Arial, "Microsoft YaHei", sans-serif;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        a {
+            color: #0366d6;
+            text-decoration: none;
+        }
+        a:hover {
+            color: #0056b3;
+            text-decoration: underline;
+        }
+
+        /* ===== Header ===== */
+        .header {
+            padding: 80px 0 50px;
+            text-align: center;
+        }
+        .header .logo {
+            font-size: 48px;
+            font-weight: 700;
+            letter-spacing: -1px;
+            color: #333;
+            margin-bottom: 12px;
+        }
+        .header .logo span {
+            color: #999;
+            font-weight: 300;
+        }
+        .header .tagline {
+            font-size: 18px;
+            color: #666;
+            font-weight: 300;
+            max-width: 600px;
+            margin: 0 auto;
+            line-height: 1.8;
+        }
+        .header .tagline code {
+            background: #f6f8fa;
+            color: #e36209;
+            padding: 2px 8px;
+            border-radius: 3px;
+            font-size: 90%;
+            border: 1px solid #e1e4e8;
+        }
+
+        /* ===== URL Bar ===== */
+        .url-bar-wrap {
+            max-width: 680px;
+            margin: 0 auto 60px;
+            padding: 0 15px;
+        }
+        .url-bar {
+            display: flex;
+            align-items: center;
+            background: #fff;
+            border: 1px solid #d1d5da;
+            border-radius: 6px;
+            overflow: hidden;
+            box-shadow: 0 1px 3px rgba(0,0,0,.04);
+            transition: border-color .2s, box-shadow .2s;
+        }
+        .url-bar:focus-within {
+            border-color: #0366d6;
+            box-shadow: 0 0 0 3px rgba(3,102,214,.15);
+        }
+        .url-bar .prefix {
+            background: #f6f8fa;
+            color: #586069;
+            padding: 12px 16px;
+            font-size: 15px;
+            font-family: Consolas, "Liberation Mono", Menlo, Courier, monospace;
+            border-right: 1px solid #e1e4e8;
+            white-space: nowrap;
+            user-select: none;
+        }
+        .url-bar input {
+            flex: 1;
+            border: none;
+            outline: none;
+            padding: 12px 16px;
+            font-size: 15px;
+            font-family: Consolas, "Liberation Mono", Menlo, Courier, monospace;
+            color: #333;
+            background: transparent;
+            min-width: 0;
+        }
+        .url-bar input::placeholder {
+            color: #959da5;
+        }
+        .url-bar .btn-go {
+            background: #0366d6;
+            color: #fff;
+            border: none;
+            padding: 12px 24px;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            white-space: nowrap;
+            transition: background .15s;
+        }
+        .url-bar .btn-go:hover {
+            background: #0256b9;
+        }
+
+        /* ===== Sections ===== */
+        .main {
+            max-width: 720px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+        .section {
+            margin-bottom: 50px;
+        }
+        .section h3 {
+            font-size: 20px;
+            font-weight: 600;
+            color: #24292e;
+            margin-bottom: 8px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid #eaecef;
+        }
+        .section p {
+            font-size: 15px;
+            color: #586069;
+            line-height: 1.8;
+            margin-bottom: 16px;
+        }
+        .section code {
+            background: #f6f8fa;
+            color: #e36209;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-size: 90%;
+        }
+
+        /* ===== Example List ===== */
+        .example-list {
+            list-style: none;
+            padding: 0;
+        }
+        .example-list li {
+            padding: 10px 14px;
+            border-bottom: 1px solid #f0f0f0;
+            font-family: Consolas, "Liberation Mono", Menlo, Courier, monospace;
+            font-size: 13px;
+            color: #586069;
+            word-break: break-all;
+            transition: background .12s;
+        }
+        .example-list li:hover {
+            background: #fafbfc;
+        }
+        .example-list li a {
+            color: #0366d6;
+        }
+        .example-list li:last-child {
+            border-bottom: none;
+        }
+
+        /* ===== Feature Cards ===== */
+        .feature-grid {
+            display: flex;
+            flex-wrap: wrap;
+            margin: 0 -12px;
+        }
+        .feature-card {
+            flex: 1 1 220px;
+            margin: 0 12px 24px;
+            padding: 20px;
+            background: #fafbfc;
+            border: 1px solid #eaecef;
+            border-radius: 6px;
+            text-align: center;
+        }
+        .feature-card .fa {
+            font-size: 28px;
+            color: #0366d6;
+            margin-bottom: 10px;
+        }
+        .feature-card h4 {
+            font-size: 15px;
+            font-weight: 600;
+            color: #24292e;
+            margin: 0 0 6px;
+        }
+        .feature-card p {
+            font-size: 13px;
+            color: #6a737d;
+            margin: 0;
+            line-height: 1.6;
+        }
+
+        /* ===== Footer ===== */
+        .footer {
+            text-align: center;
+            padding: 40px 0 50px;
+            color: #959da5;
+            font-size: 13px;
+            border-top: 1px solid #eaecef;
+            margin-top: 40px;
+        }
+        .footer a {
+            color: #586069;
+        }
+        .footer .heart {
+            color: #e25555;
+        }
+
+        /* ===== Responsive ===== */
+        @media (max-width: 768px) {
+            .header {
+                padding: 50px 15px 35px;
+            }
+            .header .logo {
+                font-size: 36px;
+            }
+            .header .tagline {
+                font-size: 15px;
+            }
+            .url-bar {
+                flex-direction: column;
+            }
+            .url-bar .prefix {
+                width: 100%;
+                text-align: center;
+                border-right: none;
+                border-bottom: 1px solid #e1e4e8;
+            }
+            .url-bar input {
+                width: 100%;
+                text-align: center;
+            }
+            .url-bar .btn-go {
+                width: 100%;
+                text-align: center;
+            }
+            .feature-card {
+                flex: 1 1 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header -->
+    <div class="header">
+        <div class="logo">Alyjs<span>.com</span></div>
+        <p class="tagline">
+            一个快速、可靠的静态资源 CDN 加速服务<br>
+            通过 URL 即可加载任意开源库文件，格式为 <code>/包名@版本/文件路径</code>
+        </p>
+    </div>
+
+    <!-- URL Bar -->
+    <div class="url-bar-wrap">
+        <div class="url-bar">
+            <span class="prefix">Alyjs.com/</span>
+            <input type="text" placeholder="jquery@2.1.4/dist/jquery.min.js" id="urlInput">
+            <button class="btn-go" onclick="navigate()">打开</button>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main">
+
+        <!-- 快速开始 -->
+        <div class="section">
+            <h3><i class="fa fa-bolt"></i> 快速开始</h3>
+            <p>直接通过 URL 访问你需要的文件，即可获取对应的静态资源。支持 <code>@latest</code> 标签获取最新版本。</p>
+        </div>
+
+        <!-- URL 格式说明 -->
+        <div class="section">
+            <h3><i class="fa fa-link"></i> URL 格式</h3>
+            <p>基本格式为：</p>
+            <p><code>https://apps.alyjs.com/包名@版本/文件路径</code></p>
+            <p>你也可以使用以下方式灵活指定版本：</p>
+            <ul class="example-list">
+                <li><a href="#">/jquery@2</a> — 使用 <code>2.x</code> 最新版</li>
+                <li><a href="#">/jquery@2.1</a> — 使用 <code>2.1.x</code> 最新版</li>
+                <li><a href="#">/jquery@latest</a> — 使用最新发行版</li>
+            </ul>
+        </div>
+
+
+    </div>
+
+    <!-- Footer -->
+    <div class="footer">
+        <p>阿里云 静态资源库 &nbsp;|&nbsp;
+        <a href="//beian.miit.gov.cn/"> 鲁ICP备2025144109号-27</a> &nbsp;|&nbsp;
+        <a href="#"><i class="fa fa-envelope"></i> 联系我们</a></p>
+        <p style="margin-top:6px;">&copy; 20246 Alyjs CDN. 本站仅提供资源加速分发服务，所有资源版权归原作者所有。</p>
+    </div>
+
+    <script src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script src="https://apps.bdimg.com/libs/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+    <script>
+        function navigate() {
+            var val = $('#urlInput').val().trim();
+            if (val) {
+                // 去掉开头可能的 /
+                if (val.charAt(0) === '/') val = val.substring(1);
+                window.location.href = '/' + val;
+            }
+        }
+        $('#urlInput').on('keydown', function(e) {
+            if (e.keyCode === 13) navigate();
+        });
+    </script>
+
+</body>
+</html>
